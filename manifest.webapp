@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "name": "bored",
+  "description": "Find new activities",
+  "type": "web",
+  "launch_path": "/index.html",
+  "categories": [
+    "Utilities"
+  ],
+  "icons": {
+    "56": "/assets/image/icon.png",
+    "112": "/assets/image/icon.png"
+  },
+  "developer": {
+    "name": "W4IT Dev",
+    "url": "https://w4it-dev.github.io/website"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Bored?",
+      "subtitle": "Find new activities",
+      "description": "fun"
+    }
+  },
+  "default_locale": "en-US"
+}
