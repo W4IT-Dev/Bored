@@ -58,8 +58,9 @@ window.onerror = function (message, source, lineno, colno, error) {
   return true;
 };
 let allSelectElems = document.querySelectorAll('select');
-allSelectElems.forEach(function (elem) {
-  elem.addEventListener('blur', () => {
-      document.getElementById(elem.parentElement.id).focus();
-  });
+
+for(let i = 0; i < allSelectElems.length; i++) {
+  allSelectElems[i].addEventListener('blur', () => {
+    allSelectElems[i].parentElement.focus();
 });
+}
