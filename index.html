@@ -10,9 +10,57 @@
 </head>
 
 <body>
-    <header>Bored?</header>
-    <input tabindex="1" name="myBrowser" placeholder="Type" /></label>
-    <p>education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]</p>
+    <div tabindex="0" class="kui-input-holder item">
+        <label class="kui-input-label">Type</label>
+        <select tabindex="1" class="kui-input">
+            <option value="">Random</option>
+            <option value="education">Education</option>
+            <option value="recreational">Recreational</option>
+            <option value="social">Social</option>
+            <option value="diy">DIY</option>
+            <option value="charity">Charity</option>
+            <option value="cooking">Cooking</option>
+            <option value="relaxation">Relaxation</option>
+            <option value="music">Music</option>
+            <option value="busywork">Busywork</option>
+        </select>
+    </div>
+    <div tabindex="1" class="kui-input-holder item">
+        <label class="kui-input-label">Price</label>
+        <select tabindex="1" class="kui-input" id="price">
+            <option value="">Random</option>
+            <option selected value="price=0">Free</option>
+            <option value="minprice=0&maxprice=0.3">Cheap</option>
+            <option value="minprice=0.3&maxprice=0.5">Affordable</option>
+            <option value="minprice=0.5&maxprice=0.8">Expensive</option>
+        </select>
+    </div>
+    <div tabindex="2" class="kui-input-holder item">
+        <label class="kui-input-label">Accessibility</label>
+        <select tabindex="1" class="kui-input" id="acc">
+            <option value="">Random</option>
+            <option selected value="accessibility=0">Accessible</option>
+            <option value="minaccessibility=0&maxaccessibility=0.3">Easily accessible</option>
+            <option value="minaccessibility=0.3&maxaccessibility=0.6">Fairly accessible</option>
+            <option value="minaccessibility=0.6&maxaccessibility=0.8">Moderately accessible</option>
+            <option value="minaccessibility=0.8&maxaccessibility=1">Hardly accessible</option>
+        </select>
+    </div>
+    <div tabindex="3" class="kui-input-holder item">
+        <label class="kui-input-label">Participants</label>
+        <select tabindex="1" class="kui-input" id="part">
+            <option value="">Random</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="8">8</option>
+        </select>
+    </div>
+    <div class="kui-input-holder ">
+        <button tabindex="4" class="item" id="gen">Generate</button>
+    </div>
     <p id="result"></p>
 </body>
 

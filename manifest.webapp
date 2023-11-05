@@ -7,9 +7,10 @@
   "categories": [
     "Utilities"
   ],
+  "theme_color": "#bfbfff",
   "icons": {
-    "56": "/assets/image/icon.png",
-    "112": "/assets/image/icon.png"
+    "56": "/icon.png",
+    "112": "/icon.png"
   },
   "developer": {
     "name": "W4IT Dev",
