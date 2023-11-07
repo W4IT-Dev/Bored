@@ -63,3 +63,57 @@ button {
     font-weight: 800;
 
 }
+
+.progress {
+    background: #fff;
+    /* box-sizing: border-box; */
+    height: 60px;
+    /* padding: 5px */
+}
+
+.progress:focus .progress-label {
+    color: #fff;
+}
+
+.progress label {
+    color: #332233;
+    display: inline-block;
+    width: 100%;
+}
+
+.progress-label {
+    float: left;
+}
+
+.progress-value {
+    float: right;
+    padding-top: 3px;
+}
+
+.progress input {
+    border-radius: 3px;
+    height: 5px;
+    outline: none;
+    width: 100%;
+}
+
+.progress input::-moz-range-thumb {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+}
+
+.progress input,
+.progress input::-moz-range-thumb,
+.progress input::-moz-range-progress,
+.progress input::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    background: #873eff;
+}
+
+* {
+    outline: 1px solid red !important;
+}

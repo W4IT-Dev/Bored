@@ -1,5 +1,11 @@
 document.querySelector('.item').focus();
-
+const type = document.querySelector('#type')
+const priceRange = document.querySelector('#priceRange')
+const accRange = document.querySelector('#accRange')
+const partRange = document.querySelector('#partRange')
+const priceRangeValue = document.querySelector('#priceRangeValue')
+const accRangeValue = document.querySelector('#accRangeValue')
+const partRangeValue = document.querySelector('#partRangeValue')
 
 document.addEventListener('keydown', e => {
   if (e.key == "Enter" && document.activeElement.id != "gen") return document.activeElement.lastElementChild.focus();
@@ -7,20 +13,28 @@ document.addEventListener('keydown', e => {
   if (e.key == "ArrowUp") nav(-1, '.item')
   if (e.key == "Enter") {
     // Define the API endpoint
-    const apiUrl = `https://www.boredapi.com/api/activity?type${document.querySelector('select').value}&${document.querySelector('#price').value}&${document.querySelector('#acc').value}&participants=${document.querySelector('#part').value}`;
+    const apiUrl = ``;
+    console.log(`https://www.boredapi.com/api/activity?type=${document.querySelector('select').value}${document.querySelector('#price').value}${document.querySelector('#acc').value}&participants=${document.querySelector('#part').value}`)
     // Make a GET request to the API
-    console.log(apiUrl)
-    fetch(apiUrl)
+    fetch(`https://www.boredapi.com/api/activity?type=${document.querySelector('select').value}${document.querySelector('#price').value}${document.querySelector('#acc').value}&participants=${document.querySelector('#part').value}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+        console.log(response)
         return response.json();
       })
       .then(data => {
         console.log(data);
-        document.querySelector('#result').innerText = data.activity || 'Nothing found'
-        const element = document.getElementById("result");
+        const element = document.getElementById("activity-result");
+        element.innerText = data.activity || 'Nothing found'
+        type.innerText = "Type: " + data.type
+        priceRange.value = data.price * 10
+        accRange.value = data.accessibility * 10
+        partRange.value = data.participants
+        priceRangeValue.innerText = data.price
+        accRangeValue.innerText = data.accessibility
+        partRangeValue.innerText = data.participants
         window.scrollTo({
           top: element.offsetTop,
           behavior: "smooth"
@@ -57,10 +71,11 @@ window.onerror = function (message, source, lineno, colno, error) {
   // Return true to prevent the default browser error handling
   return true;
 };
+
 let allSelectElems = document.querySelectorAll('select');
 
-for(let i = 0; i < allSelectElems.length; i++) {
+for (let i = 0; i < allSelectElems.length; i++) {
   allSelectElems[i].addEventListener('blur', () => {
     allSelectElems[i].parentElement.focus();
-});
+  });
 }
