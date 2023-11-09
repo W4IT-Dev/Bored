@@ -27,13 +27,16 @@ document.addEventListener('keydown', e => {
       .then(data => {
         console.log(data);
         const element = document.getElementById("activity-result");
+        document.querySelector('#result').style.display = "block"
         element.innerText = data.activity || 'Nothing found'
+        if(!data.activity) return document.querySelector('#result-info').style.display = "none"
+        
         type.innerText = "Type: " + data.type
         priceRange.value = data.price * 10
         accRange.value = data.accessibility * 10
         partRange.value = data.participants
-        priceRangeValue.innerText = data.price
-        accRangeValue.innerText = data.accessibility
+        priceRangeValue.innerText = getPriceLabel(data.price);
+        accRangeValue.innerText = getAccessibilityLabel(data.accessibility);
         partRangeValue.innerText = data.participants
         window.scrollTo({
           top: element.offsetTop,
@@ -43,6 +46,21 @@ document.addEventListener('keydown', e => {
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
+
+    function getPriceLabel(price) {
+      if (price == 0) return "Free"
+      if (price >= 0.5) return "Expensive"
+      if (price >= 0.3) return "Affordable"
+      if (price >= 0) return "Cheap"
+    }
+
+    function getAccessibilityLabel(accessibility) {
+      if (accessibility == 0) return "Accessible"
+      if (accessibility >= 0.8) return "Hardly accessible"
+      if (accessibility >= 0.6) return "Moderately accessible"
+      if (accessibility == 0.3) return "Fairly accessible"
+      if (accessibility >= 0) return "Easily accessible"
+    }
 
   }
 })

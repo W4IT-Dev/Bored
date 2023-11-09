@@ -7,9 +7,16 @@ body {
     width: 240px;
     overflow: scroll;
     scroll-behavior: smooth;
+    font-family: "Poppings";
 }
 
-input, select {
+@font-face {
+    font-family: "Poppings";
+    src: url(/Poppins-Medium.ttf);
+}
+
+input,
+select {
     height: 40px;
     width: 100%;
     font-size: 20px;
@@ -65,18 +72,10 @@ button {
 }
 
 .progress {
-    background: #fff;
-    /* box-sizing: border-box; */
     height: 60px;
-    /* padding: 5px */
-}
-
-.progress:focus .progress-label {
-    color: #fff;
 }
 
 .progress label {
-    color: #332233;
     display: inline-block;
     width: 100%;
 }
@@ -87,11 +86,9 @@ button {
 
 .progress-value {
     float: right;
-    padding-top: 3px;
 }
 
 .progress input {
-    border-radius: 3px;
     height: 5px;
     outline: none;
     width: 100%;
@@ -111,9 +108,31 @@ button {
 .progress input::-moz-range-track {
     -moz-appearance: none;
     appearance: none;
-    background: #873eff;
+    background: #1937a0;
+}
+
+#result {
+    display: none;
+    padding: 0 5px;
+}
+
+#result-info {
+    display: block;
+}
+
+#result .kui-input-holder {
+    padding: 0;
+}
+
+#activity-result {
+    font-size: 18px;
+}
+
+.secondary {
+    color: #cfcfcf;
+    font-size: 14px;
 }
 
 * {
-    outline: 1px solid red !important;
+    outline: 0px solid red !important;
 }
