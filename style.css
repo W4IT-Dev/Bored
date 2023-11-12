@@ -15,7 +15,6 @@ body {
     src: url(/Poppins-Medium.ttf);
 }
 
-input,
 select {
     height: 40px;
     width: 100%;
@@ -82,33 +81,30 @@ button {
 
 .progress-label {
     float: left;
+    font-size: 16px;
 }
 
 .progress-value {
     float: right;
+    font-size: 11px !important;
 }
 
-.progress input {
-    height: 5px;
-    outline: none;
-    width: 100%;
-}
-
-.progress input::-moz-range-thumb {
-    border: 3px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 13px;
-    width: 13px;
-}
-
-.progress input,
-.progress input::-moz-range-thumb,
-.progress input::-moz-range-progress,
-.progress input::-moz-range-track {
-    -moz-appearance: none;
+.slider {
+    width: 205px;
+    -webkit-appearance: none;
     appearance: none;
-    background: #1937a0;
+    height: 14px;
+    border-radius: 3px;
+    background: #d3d3d3;
+    outline: none;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    background: #00f;
+    cursor: pointer;
 }
 
 #result {
