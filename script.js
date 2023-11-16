@@ -30,6 +30,7 @@ document.addEventListener('keydown', e => {
         document.querySelector('#result').style.display = "block"
         element.innerText = data.activity || 'Nothing found'
         if(!data.activity) return document.querySelector('#result-info').style.display = "none"
+        else document.querySelector('#result-info').style.display = "block"
         
         type.innerText = "Type: " + data.type
         priceRange.value = data.price * 10
