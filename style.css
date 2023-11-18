@@ -15,6 +15,11 @@ body {
     src: url(/Poppins-Medium.ttf);
 }
 
+.item,
+button {
+    transition: all .2s;
+}
+
 select {
     height: 40px;
     width: 100%;
@@ -29,7 +34,7 @@ select {
 }
 
 *:focus {
-    background-color: #3358df;
+    background: #3358df;
     outline: 0;
 }
 
@@ -66,6 +71,15 @@ button {
     font-size: 25px;
     background: blue;
     color: white;
+    font-weight: 500;
+    border: 2px solid darkblue;
+    ;
+    font-family: "Poppings";
+    border-radius: 3px;
+}
+
+button:focus {
+    background: #334ee9;
     font-weight: 800;
 
 }
