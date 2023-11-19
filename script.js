@@ -121,6 +121,11 @@ let offlineActivities = localStorage.offlineActivities ? JSON.parse(localStorage
   }
 ]
 
+
+const typeSel = document.querySelector('#typeSel');
+const priceSel = document.querySelector('#priceSel');
+const accSel = document.querySelector('#accSel');
+const partSel = document.querySelector('#partSel');
 const result = document.querySelector('#result');
 const resultActivity = document.querySelector('#activity-result');
 const resultInfo = document.querySelector('#result-info');
@@ -132,15 +137,31 @@ const priceRangeValue = document.querySelector('#priceRangeValue');
 const accRangeValue = document.querySelector('#accRangeValue');
 const partRangeValue = document.querySelector('#partRangeValue');
 
+window.addEventListener("online", () => {
+  priceSel.parentNode.style.display = "block"
+  accSel.parentNode.style.display = "block"
+  partSel.parentNode.style.display = "block"
+});
+
+window.addEventListener("offline", () => {
+  priceSel.parentNode.style.display = "none"
+  accSel.parentNode.style.display = "none"
+  partSel.parentNode.style.display = "none"
+});
+
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && document.activeElement.id !== 'gen') return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');
   if (e.key === 'Enter') {
     if (!navigator.onLine) {
-
+      let ac = offlineActivities[Math.floor(Math.random() * offlineActivities.length)];
+      console.log(ac)
+      displayActivity(ac)
+      return
     }
-    const apiURL = `https://www.boredapi.com/api/activity?type=${document.querySelector('select').value}${document.querySelector('#price').value}${document.querySelector('#acc').value}&participants=${document.querySelector('#part').value}`;
+    const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
     fetch(apiURL)
       .then((response) => {
         if (!response.ok) {
@@ -158,25 +179,25 @@ document.addEventListener('keydown', (e) => {
         console.error('There was a problem with the fetch operation:', error);
       });
 
-    function displayActivity(data) {
+    function displayActivity(json) {
       result.style.display = 'block';
-      resultActivity.innerText = data.activity || 'Nothing found';
+      resultActivity.innerText = json.activity || 'Nothing found';
 
-      if (!data.activity) {
+      if (!json.activity) {
         return resultInfo.style.display = 'none';
       } else {
         resultInfo.style.display = 'block';
       }
-      offlineActivities.unshift(data)
+      offlineActivities.unshift(json)
       localStorage.offlineActivities = JSON.stringify(offlineActivities);
 
-      type.innerText = 'Type: ' + data.type;
-      priceRange.value = data.price * 10;
-      accRange.value = data.accessibility * 10;
-      partRange.value = data.participants;
-      priceRangeValue.innerText = getPriceLabel(data.price);
-      accRangeValue.innerText = getAccessibilityLabel(data.accessibility);
-      partRangeValue.innerText = data.participants;
+      type.innerText = 'Type: ' + json.type;
+      priceRange.value = json.price * 10;
+      accRange.value = json.accessibility * 10;
+      partRange.value = json.participants;
+      priceRangeValue.innerText = getPriceLabel(json.price);
+      accRangeValue.innerText = getAccessibilityLabel(json.accessibility);
+      partRangeValue.innerText = json.participants;
 
       window.scrollTo({
         top: result.offsetTop,
@@ -209,6 +230,8 @@ function nav(move, elems) {
   const next = currentElemIdx + move;
   const targetElement = items[next];
   if (targetElement) targetElement.focus();
+  if(targetElement.id == "gen") targetElement.parentNode.classList.add('focus-within')
+  if(currentIndex.id == "gen") currentIndex.parentNode.classList.remove('focus-within')
 }
 
 window.onerror = function (message, source, lineno, colno, error) {
@@ -217,9 +240,8 @@ window.onerror = function (message, source, lineno, colno, error) {
   console.error('Line Number: ' + lineno);
   console.error('Column Number: ' + colno);
 
-  if (error) {
-    console.error('Error Object:', error);
-  }
+  if (error) console.error('Error Object:', error);
+
 
   return true;
 };
