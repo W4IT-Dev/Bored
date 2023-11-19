@@ -137,18 +137,6 @@ const priceRangeValue = document.querySelector('#priceRangeValue');
 const accRangeValue = document.querySelector('#accRangeValue');
 const partRangeValue = document.querySelector('#partRangeValue');
 
-window.addEventListener("online", () => {
-  priceSel.parentNode.style.display = "block"
-  accSel.parentNode.style.display = "block"
-  partSel.parentNode.style.display = "block"
-});
-
-window.addEventListener("offline", () => {
-  priceSel.parentNode.style.display = "none"
-  accSel.parentNode.style.display = "none"
-  partSel.parentNode.style.display = "none"
-});
-
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && document.activeElement.id !== 'gen') return document.activeElement.lastElementChild.focus();
@@ -156,9 +144,61 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') nav(-1, '.item');
   if (e.key === 'Enter') {
     if (!navigator.onLine) {
-      let ac = offlineActivities[Math.floor(Math.random() * offlineActivities.length)];
-      console.log(ac)
-      displayActivity(ac)
+      let filteredElements = offlineActivities;
+      console.log("Orignal filtered")
+      console.log(filteredElements)
+
+      //Type
+      if (typeSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.type === typeSel.value);
+      console.log("Filtered after type")
+      console.log(filteredElements)
+
+
+      //Price
+      if (priceSel.selectedIndex !== 0) {
+        if (priceSel.value == "&price=0") {
+          filteredElements = filteredElements.filter(element => element.price === 0);
+        } else {
+          const minpriceMatch = priceSel.value.match(/(?:&minprice=)([^&]+)/);
+          const maxpriceMatch = priceSel.value.match(/(?:&maxprice=)([^&]+)/);
+
+          const minprice = minpriceMatch ? parseFloat(minpriceMatch[1]) : 0;
+          const maxprice = maxpriceMatch ? parseFloat(maxpriceMatch[1]) : 0;
+
+          filteredElements = filteredElements.filter(element => element.price >= minprice && element.price <= maxprice);
+        }
+      }
+      console.log("Filtered after price")
+      console.log(filteredElements)
+
+      //Accesiblities
+      if (accSel.selectedIndex !== 0) {
+        if (accSel.value == "&accessibility=0") {
+          filteredElements = filteredElements.filter(element => element.accessibility === 0);
+        } else {
+          const minaccMatch = accSel.value.match(/(?:&minaccessibility=)([^&]+)/);
+          const maxaccMatch = accSel.value.match(/(?:&maxaccessibility=)([^&]+)/);
+
+          const minacc = minaccMatch ? parseFloat(minaccMatch[1]) : 0;
+          const maxacc = maxaccMatch ? parseFloat(maxaccMatch[1]) : 0;
+
+          filteredElements = filteredElements.filter(element => element.accessibility >= minacc && element.accessibility <= maxacc);
+        }
+      }
+      console.log("Filtered after accesiltity")
+      console.log(filteredElements)
+
+      // participants
+      if (partSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.participants === Math.floor(partSel.value));
+      console.log("Filtered after partipacints")
+      console.log(filteredElements)
+
+      console.log("FFinal")
+
+      console.log(filteredElements)
+
+      // let ac = offlineActivities[Math.floor(Math.random() * offlineActivities.length)];
+      displayActivity(filteredElements[Math.floor(Math.random() * filteredElements.length)]);
       return
     }
     const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
@@ -181,15 +221,20 @@ document.addEventListener('keydown', (e) => {
 
     function displayActivity(json) {
       result.style.display = 'block';
+      if (!json) {
+        resultActivity.innerText = 'Nothing found'
+        resultInfo.style.display = 'none';
+        return
+      }
       resultActivity.innerText = json.activity || 'Nothing found';
 
-      if (!json.activity) {
-        return resultInfo.style.display = 'none';
-      } else {
-        resultInfo.style.display = 'block';
+
+      resultInfo.style.display = 'block';
+
+      if (navigator.onLine) {
+        offlineActivities.unshift(json)
+        localStorage.offlineActivities = JSON.stringify(offlineActivities);
       }
-      offlineActivities.unshift(json)
-      localStorage.offlineActivities = JSON.stringify(offlineActivities);
 
       type.innerText = 'Type: ' + json.type;
       priceRange.value = json.price * 10;
@@ -230,8 +275,9 @@ function nav(move, elems) {
   const next = currentElemIdx + move;
   const targetElement = items[next];
   if (targetElement) targetElement.focus();
-  if(targetElement.id == "gen") targetElement.parentNode.classList.add('focus-within')
-  if(currentIndex.id == "gen") currentIndex.parentNode.classList.remove('focus-within')
+  else return
+  if (targetElement.id == "gen") targetElement.parentNode.classList.add('focus-within')
+  if (currentIndex.id == "gen") currentIndex.parentNode.classList.remove('focus-within')
 }
 
 window.onerror = function (message, source, lineno, colno, error) {
