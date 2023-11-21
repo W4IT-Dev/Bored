@@ -1,7 +1,7 @@
 {
-  "version": "0.0.0.4",
+  "version": "0.0.0.6",
   "name": "bored",
-  "description": "Find new activities",
+  "description": "Find new activities.",
   "type": "web",
   "launch_path": "/index.html",
   "categories": [
@@ -19,8 +19,8 @@
   "locales": {
     "en-US": {
       "name": "Bored?",
-      "subtitle": "Find new activities",
-      "description": "fun"
+      "subtitle": "Find new activities.",
+      "description": "This app is your ultimate boredom buster! Generate personalized activity suggestions based on your preferences by choosing activity types (e.g., educational, recreational, social), setting price ranges, adjusting accessibility levels, and selecting the number of participants. And If you're feeling really bored, you can generate a random activity, regardless of any settings you've made. Whether offline or online, this app will you make never bored again."
     }
   },
   "default_locale": "en-US"

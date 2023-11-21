@@ -12,7 +12,7 @@ body {
 
 @font-face {
     font-family: "Poppings";
-    src: url(/Poppins-Medium.ttf);
+    src: url(/Poppins-Medium.woff);
 }
 
 .item,
@@ -64,7 +64,7 @@ select {
 }
 
 button {
-    line-height: 20px;
+    line-height: 25px;
     height: 40px;
     width: 100%;
     font-size: 25px;

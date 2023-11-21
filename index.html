@@ -7,6 +7,7 @@
     <title>Bored?</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="kaiads.v5.min.js"></script>
 </head>
 
 <body>
@@ -58,35 +59,39 @@
             <option value="8">8</option>
         </select>
     </div>
-    <div class="kui-input-holder ">
-        <button tabindex="4" class="item" id="gen">Generate</button>
+    <div class="kui-input-holder">
+        <button tabindex="4" class="item canFocusWithin" id="gen">Generate</button>
     </div>
-    <div id="result">
-        <b id="activity-result">idea</b>
-        <div id="result-info">
-            <p id="type">Type: </p>
-            <div class="kui-input-holder  progress">
-                <label for="">
-                    <span class="progress-label">Price</span>
-                    <span class="progress-value secondary" id="priceRangeValue">x</span>
-                </label>
-                <input id="priceRange" class="slider" type="range" min="0" max="8" value="0">
-            </div>
-            <div class="kui-input-holder  progress">
-                <label for="">
-                    <span class="progress-label">Accessibility</span>
-                    <span class="progress-value secondary" id="accRangeValue">x</span>
-                </label>
-                <input id="accRange" class="slider" type="range" min="0" max="10" value="0">
-            </div>
-            <div class="kui-input-holder progress ">
-                <label for="">
-                    <span class="progress-label">Participants</span>
-                    <span class="progress-value secondary" id="partRangeValue">x</span>
-                </label>
-                <input id="partRange" class="slider" type="range" min="1" max="8" value="1">
-            </div>
+    <div class="kui-input-holder">
+        <button tabindex="4" class="item canFocusWithin" id="randomgen">Random</button>
+    </div>
+    <br>
+     <div id="result">
+    <b id="activity-result">idea</b>
+    <div id="result-info">
+        <p id="type">Type: </p>
+        <div class="kui-input-holder  progress">
+            <label for="">
+                <span class="progress-label">Price</span>
+                <span class="progress-value secondary" id="priceRangeValue">x</span>
+            </label>
+            <input id="priceRange" class="slider" type="range" min="0" max="8" value="0">
         </div>
+        <div class="kui-input-holder  progress">
+            <label for="">
+                <span class="progress-label">Accessibility</span>
+                <span class="progress-value secondary" id="accRangeValue">x</span>
+            </label>
+            <input id="accRange" class="slider" type="range" min="0" max="10" value="0">
+        </div>
+        <div class="kui-input-holder progress ">
+            <label for="">
+                <span class="progress-label">Participants</span>
+                <span class="progress-value secondary" id="partRangeValue">x</span>
+            </label>
+            <input id="partRange" class="slider" type="range" min="1" max="8" value="1">
+        </div>
+    </div>
     </div>
 </body>
 

@@ -137,22 +137,52 @@ const priceRangeValue = document.querySelector('#priceRangeValue');
 const accRangeValue = document.querySelector('#accRangeValue');
 const partRangeValue = document.querySelector('#partRangeValue');
 
+const adContainer = document.querySelector('.ad-container')
 
+getKaiAd({
+  publisher: 'fe2d9134-74be-48d8-83b9-96f6d803efef',
+  app: 'bored',
+  test: 1,
+  onerror: err => console.error('Error getting ad:', err),
+  onready: ad => {
+    ad.call('display')
+  }
+})
+window.addEventListener("beforeunload", (event) => {
+  e.preventDefault();
+  //set alarm
+});
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && document.activeElement.id !== 'gen') return document.activeElement.lastElementChild.focus();
+  if (e.key === 'Enter' && !document.activeElement.id.includes('gen')) return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');
   if (e.key === 'Enter') {
+    const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
+
+    if (document.activeElement.id === "randomgen") {
+      if (!navigator.onLine) return displayActivity(offlineActivities[Math.floor(Math.random() * offlineActivities.length)]);
+      fetch("https://www.boredapi.com/api/")
+        .then((response) => {
+          if (!response.ok) {
+            alert('Network response was not ok');
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          displayActivity(data)
+        })
+        .catch((error) => {
+          alert('There was a problem with the fetch operation:', error);
+        });
+
+      return
+    }
     if (!navigator.onLine) {
       let filteredElements = offlineActivities;
-      console.log("Orignal filtered")
-      console.log(filteredElements)
 
       //Type
       if (typeSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.type === typeSel.value);
-      console.log("Filtered after type")
-      console.log(filteredElements)
-
 
       //Price
       if (priceSel.selectedIndex !== 0) {
@@ -168,8 +198,6 @@ document.addEventListener('keydown', (e) => {
           filteredElements = filteredElements.filter(element => element.price >= minprice && element.price <= maxprice);
         }
       }
-      console.log("Filtered after price")
-      console.log(filteredElements)
 
       //Accesiblities
       if (accSel.selectedIndex !== 0) {
@@ -185,38 +213,26 @@ document.addEventListener('keydown', (e) => {
           filteredElements = filteredElements.filter(element => element.accessibility >= minacc && element.accessibility <= maxacc);
         }
       }
-      console.log("Filtered after accesiltity")
-      console.log(filteredElements)
 
       // participants
       if (partSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.participants === Math.floor(partSel.value));
-      console.log("Filtered after partipacints")
-      console.log(filteredElements)
 
-      console.log("FFinal")
-
-      console.log(filteredElements)
-
-      // let ac = offlineActivities[Math.floor(Math.random() * offlineActivities.length)];
       displayActivity(filteredElements[Math.floor(Math.random() * filteredElements.length)]);
       return
     }
-    const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
     fetch(apiURL)
       .then((response) => {
         if (!response.ok) {
           alert('Network response was not ok');
           throw new Error('Network response was not ok');
         }
-        console.log(response);
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         displayActivity(data)
       })
       .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
+        alert('There was a problem with the fetch operation:', error);
       });
 
     function displayActivity(json) {
@@ -228,10 +244,9 @@ document.addEventListener('keydown', (e) => {
       }
       resultActivity.innerText = json.activity || 'Nothing found';
 
-
       resultInfo.style.display = 'block';
 
-      if (navigator.onLine) {
+      if (navigator.onLine && offlineActivities.find(obj => obj.key === json.key) == undefined) {
         offlineActivities.unshift(json)
         localStorage.offlineActivities = JSON.stringify(offlineActivities);
       }
@@ -246,7 +261,7 @@ document.addEventListener('keydown', (e) => {
 
       window.scrollTo({
         top: result.offsetTop,
-        behavior: 'smooth',
+        // behavior: 'smooth',
       });
 
     }
@@ -275,9 +290,11 @@ function nav(move, elems) {
   const next = currentElemIdx + move;
   const targetElement = items[next];
   if (targetElement) targetElement.focus();
-  else return
-  if (targetElement.id == "gen") targetElement.parentNode.classList.add('focus-within')
-  if (currentIndex.id == "gen") currentIndex.parentNode.classList.remove('focus-within')
+  else return console.log('not there');
+  if (targetElement && targetElement.classList.contains('canFocusWithin') && !targetElement.classList.contains('ad-container')) targetElement.parentNode.classList.add('focus-within')
+  if (currentIndex.classList.contains('canFocusWithin')) currentIndex.parentNode.classList.remove('focus-within');
+
+
 }
 
 window.onerror = function (message, source, lineno, colno, error) {
