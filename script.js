@@ -161,8 +161,9 @@ document.addEventListener('keydown', (e) => {
 
     if (document.activeElement.id === "randomgen") {
       if (!navigator.onLine) return displayActivity(offlineActivities[Math.floor(Math.random() * offlineActivities.length)]);
-      fetch("https://www.boredapi.com/api/")
+      fetch("https://www.boredapi.com/api/activity")
         .then((response) => {
+          console.log(response)
           if (!response.ok) {
             alert('Network response was not ok');
             throw new Error('Network response was not ok');
@@ -170,6 +171,8 @@ document.addEventListener('keydown', (e) => {
           return response.json();
         })
         .then((data) => {
+          console.log(data)
+
           displayActivity(data)
         })
         .catch((error) => {
