@@ -1,1 +1,152 @@
-body{background-color: #1937a0;color: white;margin: 0;padding: 0;height: 294px;width: 240px;overflow: scroll;scroll-behavior: smooth;font-family: "Poppings"}@font-face{font-family: "Poppings";src: url(/Poppins-Medium.woff)}.item,button{transition: all .2s}select{height: 40px;width: 100%;font-size: 20px;background: white}.kui-input-holder{padding: 5px;padding-bottom: 10px}.buttonHolder{padding: 5px}*:focus,.focus-within{background: #3358df;outline: 0}.kui-input-label{display: block;padding-bottom: 3px;font-size: 14px}.kui-input-holder:focus .kui-input-label{color: #fff}.kui-input{border: 1px solid #aaaaaa;border-radius: 2px;-moz-box-sizing: border-box;box-sizing: border-box}.kui-input ::-moz-placeholder,.kui-input :-moz-placeholder{color: #323232}.kui-input:focus{outline: 0}button{line-height: 25px;height: 40px;width: 100%;font-size: 25px;background: blue;color: white;font-weight: 500;border: 1px solid darkblue;;font-family: "Poppings";border-radius: 3px}button:focus{background: #334ee9;font-weight: 800}.progress{height: 60px}.progress label{display: inline-block;width: 100%}.progress-label{float: left;font-size: 16px}.progress-value{float: right;font-size: 11px !important}.slider{width: 205px;-webkit-appearance: none;appearance: none;height: 10px;border-radius: 3px;background: #d3d3d3;outline: none}.slider::-moz-range-thumb{width: 20px;height: 20px;border-radius: 20%;background: #00f;cursor: pointer}#result{display: none;padding: 0 5px}#result-info{display: block}#result .kui-input-holder{padding: 0}#activity-result{font-size: 18px}.secondary{color: #cfcfcf;font-size: 14px}*{outline: 0px solid red !important}
+body {
+    background-color: #1937a0;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 294px;
+    width: 240px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    font-family: "Poppings";
+}
+
+@font-face {
+    font-family: "Poppings";
+    src: url(/Poppins-Medium.woff);
+}
+
+.item,
+button {
+    transition: all .2s;
+}
+
+select {
+    height: 40px;
+    width: 100%;
+    font-size: 20px;
+    background: white;
+}
+
+.kui-input-holder {
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.buttonHolder {
+    padding: 5px;
+}
+
+*:focus,
+.focus-within {
+    background: #3358df;
+    outline: 0;
+}
+
+.kui-input-label {
+    display: block;
+    padding-bottom: 3px;
+    font-size: 14px;
+}
+
+.kui-input-holder:focus .kui-input-label {
+    color: #fff;
+}
+
+.kui-input {
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.kui-input ::-moz-placeholder,
+.kui-input :-moz-placeholder {
+    color: #323232;
+}
+
+.kui-input:focus {
+    outline: 0;
+}
+
+button {
+    line-height: 25px;
+    height: 40px;
+    width: 100%;
+    font-size: 25px;
+    background: blue;
+    color: white;
+    font-weight: 500;
+    border: 1px solid darkblue;
+    ;
+    font-family: "Poppings";
+    border-radius: 3px;
+}
+
+button:focus {
+    background: #334ee9;
+    font-weight: 800;
+
+}
+
+.progress {
+    height: 60px;
+}
+
+.progress label {
+    display: inline-block;
+    width: 100%;
+}
+
+.progress-label {
+    float: left;
+    font-size: 16px;
+}
+
+.progress-value {
+    float: right;
+    font-size: 11px !important;
+}
+
+.slider {
+    width: 205px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    border-radius: 3px;
+    background: #d3d3d3;
+    outline: none;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    background: #00f;
+    cursor: pointer;
+}
+
+#result {
+    display: none;
+    padding: 0 5px;
+}
+
+#result-info {
+    display: block;
+}
+
+#result .kui-input-holder {
+    padding: 0;
+}
+
+#activity-result {
+    font-size: 18px;
+}
+
+.secondary {
+    color: #cfcfcf;
+    font-size: 14px;
+}
+
+* {
+    outline: 0px solid red !important;
+}

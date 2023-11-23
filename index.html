@@ -1,1 +1,98 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bored?</title><link rel="stylesheet" href="style.css"><script src="script.js" defer="defer"></script><script src="kaiads.v5.min.js"></script></head><body><div tabindex="0" class="kui-input-holder item"><label class="kui-input-label">Type</label><select tabindex="1" class="kui-input" id="typeSel"><option value="">Random</option><option value="education">Education</option><option value="recreational">Recreational</option><option value="social">Social</option><option value="diy">DIY</option><option value="charity">Charity</option><option value="cooking">Cooking</option><option value="relaxation">Relaxation</option><option value="music">Music</option><option value="busywork">Busywork</option></select></div><div tabindex="1" class="kui-input-holder item"><label class="kui-input-label">Price</label><select tabindex="1" class="kui-input" id="priceSel"><option value="">Random</option><option selected="selected" value="&price=0">Free</option><option value="&minprice=0&maxprice=0.3">Cheap</option><option value="&minprice=0.3&maxprice=0.5">Affordable</option><option value="&minprice=0.5&maxprice=0.8">Expensive</option></select></div><div tabindex="2" class="kui-input-holder item"><label class="kui-input-label">Accessibility</label><select tabindex="1" class="kui-input" id="accSel"><option value="">Random</option><option value="&accessibility=0">Accessible</option><option selected="selected" value="&minaccessibility=0&maxaccessibility=0.3">Easily accessible</option><option value="&minaccessibility=0.3&maxaccessibility=0.6">Fairly accessible</option><option value="&minaccessibility=0.6&maxaccessibility=0.8">Moderately accessible</option><option value="&minaccessibility=0.8&maxaccessibility=1">Hardly accessible</option></select></div><div tabindex="3" class="kui-input-holder item"><label class="kui-input-label">Participants</label><select tabindex="1" class="kui-input" id="partSel"><option value="">Random</option><option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="8">8</option></select></div><div class="kui-input-holder buttonHolder"><button tabindex="4" class="item canFocusWithin" id="gen">Generate</button></div><div class="kui-input-holder buttonHolder"><button tabindex="4" class="item canFocusWithin" id="randomgen">Random</button></div><br><div id="result"><b id="activity-result">idea</b><div id="result-info"><p id="type">Type:</p><div class="kui-input-holder progress"><label for=""><span class="progress-label">Price</span><span class="progress-value secondary" id="priceRangeValue">x</span></label><input id="priceRange" class="slider" type="range" min="0" max="8" value="0"></div><div class="kui-input-holder progress"><label for=""><span class="progress-label">Accessibility</span><span class="progress-value secondary" id="accRangeValue">x</span></label><input id="accRange" class="slider" type="range" min="0" max="10" value="0"></div><div class="kui-input-holder progress"><label for=""><span class="progress-label">Participants</span><span class="progress-value secondary" id="partRangeValue">x</span></label><input id="partRange" class="slider" type="range" min="1" max="8" value="1"></div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bored?</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="kaiads.v5.min.js"></script>
+</head>
+
+<body>
+    <div tabindex="0" class="kui-input-holder item">
+        <label class="kui-input-label">Type</label>
+        <select tabindex="1" class="kui-input" id="typeSel">
+            <option value="">Random</option>
+            <option value="education">Education</option>
+            <option value="recreational">Recreational</option>
+            <option value="social">Social</option>
+            <option value="diy">DIY</option>
+            <option value="charity">Charity</option>
+            <option value="cooking">Cooking</option>
+            <option value="relaxation">Relaxation</option>
+            <option value="music">Music</option>
+            <option value="busywork">Busywork</option>
+        </select>
+    </div>
+    <div tabindex="1" class="kui-input-holder item">
+        <label class="kui-input-label">Price</label>
+        <select tabindex="1" class="kui-input" id="priceSel">
+            <option value="">Random</option>
+            <option selected value="&price=0">Free</option>
+            <option value="&minprice=0&maxprice=0.3">Cheap</option>
+            <option value="&minprice=0.3&maxprice=0.5">Affordable</option>
+            <option value="&minprice=0.5&maxprice=0.8">Expensive</option>
+        </select>
+    </div>
+    <div tabindex="2" class="kui-input-holder item">
+        <label class="kui-input-label">Accessibility</label>
+        <select tabindex="1" class="kui-input" id="accSel">
+            <option value="">Random</option>
+            <option value="&accessibility=0">Accessible</option>
+            <option selected value="&minaccessibility=0&maxaccessibility=0.3">Easily accessible</option>
+            <option value="&minaccessibility=0.3&maxaccessibility=0.6">Fairly accessible</option>
+            <option value="&minaccessibility=0.6&maxaccessibility=0.8">Moderately accessible</option>
+            <option value="&minaccessibility=0.8&maxaccessibility=1">Hardly accessible</option>
+        </select>
+    </div>
+    <div tabindex="3" class="kui-input-holder item">
+        <label class="kui-input-label">Participants</label>
+        <select tabindex="1" class="kui-input" id="partSel">
+            <option value="">Random</option>
+            <option selected value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="8">8</option>
+        </select>
+    </div>
+    <div class="kui-input-holder buttonHolder">
+        <button tabindex="4" class="item canFocusWithin" id="gen">Generate</button>
+    </div>
+    <div class="kui-input-holder buttonHolder">
+        <button tabindex="4" class="item canFocusWithin" id="randomgen">Random</button>
+    </div>
+    <br>
+     <div id="result">
+    <b id="activity-result">idea</b>
+    <div id="result-info">
+        <p id="type">Type: </p>
+        <div class="kui-input-holder  progress">
+            <label for="">
+                <span class="progress-label">Price</span>
+                <span class="progress-value secondary" id="priceRangeValue">x</span>
+            </label>
+            <input id="priceRange" class="slider" type="range" min="0" max="8" value="0">
+        </div>
+        <div class="kui-input-holder  progress">
+            <label for="">
+                <span class="progress-label">Accessibility</span>
+                <span class="progress-value secondary" id="accRangeValue">x</span>
+            </label>
+            <input id="accRange" class="slider" type="range" min="0" max="10" value="0">
+        </div>
+        <div class="kui-input-holder progress ">
+            <label for="">
+                <span class="progress-label">Participants</span>
+                <span class="progress-value secondary" id="partRangeValue">x</span>
+            </label>
+            <input id="partRange" class="slider" type="range" min="1" max="8" value="1">
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

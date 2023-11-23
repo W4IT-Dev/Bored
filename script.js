@@ -1,1 +1,313 @@
-document.querySelector(".item").focus();let offlineActivities=localStorage.offlineActivities?JSON.parse(localStorage.offlineActivities):[{activity:"Make a new friend",type:"social",participants:1,price:0,link:"",key:"1000000",accessibility:0},{activity:"Configure two-factor authentication on your accounts",type:"busywork",participants:1,price:0,link:"https://en.wikipedia.org/wiki/Multi-factor_authentication",key:"1572120",accessibility:0},{activity:"Play a video game",type:"recreational",participants:1,price:0,link:"",key:"5534113",accessibility:0},{activity:"Practice coding in your favorite lanaguage",type:"recreational",participants:1,price:0,link:"",key:"7096020",accessibility:.1},{activity:"Clean out your garage",type:"busywork",participants:1,price:0,link:"",key:"7023703",accessibility:.1},{activity:"Write a song",type:"music",participants:1,price:0,link:"",key:"5188388",accessibility:0},{activity:"Start a daily journal",type:"relaxation",participants:1,price:0,link:"",key:"8779876",accessibility:0},{activity:"Learn about a distributed version control system such as Git",type:"education",participants:1,price:0,link:"https://en.wikipedia.org/wiki/Distributed_version_control",key:"9303608",accessibility:0},{activity:"Create a meal plan for the coming week",type:"cooking",participants:1,price:0,link:"",key:"3491470",accessibility:0},{activity:"Make a to-do list for your week",type:"busywork",participants:1,price:0,link:"",key:"5920481",accessibility:.05},{activity:"Organize your music collection",type:"busywork",participants:1,price:0,link:"",key:"3151646",accessibility:0},{activity:"Create a cookbook with your favorite recipes",type:"cooking",participants:1,price:0,link:"",key:"1947449",accessibility:.05},{activity:"Make a bucket list",type:"busywork",participants:1,price:0,link:"",key:"2735499",accessibility:0}];const typeSel=document.querySelector("#typeSel"),priceSel=document.querySelector("#priceSel"),accSel=document.querySelector("#accSel"),partSel=document.querySelector("#partSel"),result=document.querySelector("#result"),resultActivity=document.querySelector("#activity-result"),resultInfo=document.querySelector("#result-info"),type=document.querySelector("#type"),priceRange=document.querySelector("#priceRange"),accRange=document.querySelector("#accRange"),partRange=document.querySelector("#partRange"),priceRangeValue=document.querySelector("#priceRangeValue"),accRangeValue=document.querySelector("#accRangeValue"),partRangeValue=document.querySelector("#partRangeValue"),adContainer=document.querySelector(".ad-container");function nav(e,t){const i=document.activeElement,r=document.querySelectorAll(t);const a=r[[...r].indexOf(i)+e];if(!a)return console.log("No nav element.");a.focus(),a&&a.classList.contains("canFocusWithin")&&!a.classList.contains("ad-container")&&a.parentNode.classList.add("focus-within"),i.classList.contains("canFocusWithin")&&i.parentNode.classList.remove("focus-within")}getKaiAd({publisher:"fe2d9134-74be-48d8-83b9-96f6d803efef",app:"bored",test:1,onerror:e=>console.error("Error getting ad:",e),onready:e=>{e.call("display")}}),window.addEventListener("beforeunload",(t=>{e.preventDefault()})),document.addEventListener("keydown",(e=>{if("#"==e.key)return window.open("/about.html");if("Enter"===e.key&&!document.activeElement.id.includes("gen"))return document.activeElement.lastElementChild.focus();if("ArrowDown"===e.key&&nav(1,".item"),"ArrowUp"===e.key&&nav(-1,".item"),"Enter"===e.key){const r=`https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;if("randomgen"===document.activeElement.id)return navigator.onLine?void fetch("https://www.boredapi.com/api/activity").then((e=>{if(!e.ok)throw alert("Network response was not ok"),new Error("Network response was not ok");return e.json()})).then((e=>{t(e)})).catch((e=>{alert("There was a problem with the fetch operation: "+e)})):t(offlineActivities[Math.floor(Math.random()*offlineActivities.length)]);if(!navigator.onLine){let a=offlineActivities;if(0!==typeSel.selectedIndex&&(a=a.filter((e=>e.type===typeSel.value))),0!==priceSel.selectedIndex)if("&price=0"==priceSel.value)a=a.filter((e=>0===e.price));else{const c=priceSel.value.match(/(?:&minprice=)([^&]+)/),n=priceSel.value.match(/(?:&maxprice=)([^&]+)/),o=c?parseFloat(c[1]):0,l=n?parseFloat(n[1]):0;a=a.filter((e=>e.price>=o&&e.price<=l))}if(0!==accSel.selectedIndex)if("&accessibility=0"==accSel.value)a=a.filter((e=>0===e.accessibility));else{const s=accSel.value.match(/(?:&minaccessibility=)([^&]+)/),u=accSel.value.match(/(?:&maxaccessibility=)([^&]+)/),p=s?parseFloat(s[1]):0,y=u?parseFloat(u[1]):0;a=a.filter((e=>e.accessibility>=p&&e.accessibility<=y))}return 0!==partSel.selectedIndex&&(a=a.filter((e=>e.participants===Math.floor(partSel.value)))),void t(a[Math.floor(Math.random()*a.length)])}function t(e){if(result.style.display="block",null==e)return resultActivity.innerText="Nothing found",resultInfo.style.display="none",void i();resultActivity.innerText=e.activity||"Nothing found",e.activity?resultInfo.style.display="block":resultInfo.style.display="none",navigator.onLine&&null==offlineActivities.find((t=>t.key===e.key))&&(offlineActivities.unshift(e),localStorage.offlineActivities=JSON.stringify(offlineActivities)),type.innerText="Type: "+e.type,priceRange.value=10*e.price,accRange.value=10*e.accessibility,partRange.value=e.participants,priceRangeValue.innerText=function(e){if(0===e)return"Free";if(e>=.5)return"Expensive";if(e>=.3)return"Affordable";if(e>=0)return"Cheap"}(e.price),accRangeValue.innerText=function(e){if(0===e)return"Accessible";if(e>=.8)return"Hardly accessible";if(e>=.6)return"Moderately accessible";if(.3===e)return"Fairly accessible";if(e>=0)return"Easily accessible"}(e.accessibility),partRangeValue.innerText=e.participants,i()}function i(){window.scrollTo({top:resultActivity.offsetTop,behavior:"smooth"})}fetch(r).then((e=>{if(!e.ok)throw alert("Network response was not ok"),new Error("Network response was not ok");return e.json()})).then((e=>{t(e)})).catch((e=>{alert("There was a problem with the fetch operation:",e)}))}})),window.onerror=function(e,t,i,r,a){return console.error("Error Message: "+e),console.error("Source: "+t),console.error("Line Number: "+i),console.error("Column Number: "+r),a&&console.error("Error Object:",a),!0};const allSelectElems=document.querySelectorAll("select");for(let e=0;e<allSelectElems.length;e++)allSelectElems[e].addEventListener("blur",(()=>{allSelectElems[e].parentElement.focus()}));
+
+document.querySelector('.item').focus();
+
+let offlineActivities = localStorage.offlineActivities ? JSON.parse(localStorage.offlineActivities) : [
+  {
+    "activity": "Make a new friend",
+    "type": "social",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "1000000",
+    "accessibility": 0
+  },
+  {
+    "activity": "Configure two-factor authentication on your accounts",
+    "type": "busywork",
+    "participants": 1,
+    "price": 0,
+    "link": "https://en.wikipedia.org/wiki/Multi-factor_authentication",
+    "key": "1572120",
+    "accessibility": 0
+  },
+  {
+    "activity": "Play a video game",
+    "type": "recreational",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "5534113",
+    "accessibility": 0
+  },
+  {
+    "activity": "Practice coding in your favorite lanaguage",
+    "type": "recreational",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "7096020",
+    "accessibility": 0.1
+  },
+  {
+    "activity": "Clean out your garage",
+    "type": "busywork",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "7023703",
+    "accessibility": 0.1
+  },
+  {
+    "activity": "Write a song",
+    "type": "music",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "5188388",
+    "accessibility": 0
+  },
+  {
+    "activity": "Start a daily journal",
+    "type": "relaxation",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "8779876",
+    "accessibility": 0
+  },
+  {
+    "activity": "Learn about a distributed version control system such as Git",
+    "type": "education",
+    "participants": 1,
+    "price": 0,
+    "link": "https://en.wikipedia.org/wiki/Distributed_version_control",
+    "key": "9303608",
+    "accessibility": 0
+  },
+  {
+    "activity": "Create a meal plan for the coming week",
+    "type": "cooking",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "3491470",
+    "accessibility": 0
+  },
+  {
+    "activity": "Make a to-do list for your week",
+    "type": "busywork",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "5920481",
+    "accessibility": 0.05
+  },
+  {
+    "activity": "Organize your music collection",
+    "type": "busywork",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "3151646",
+    "accessibility": 0
+  },
+  {
+    "activity": "Create a cookbook with your favorite recipes",
+    "type": "cooking",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "1947449",
+    "accessibility": 0.05
+  },
+  {
+    "activity": "Make a bucket list",
+    "type": "busywork",
+    "participants": 1,
+    "price": 0,
+    "link": "",
+    "key": "2735499",
+    "accessibility": 0
+  }
+]
+
+
+const typeSel = document.querySelector('#typeSel');
+const priceSel = document.querySelector('#priceSel');
+const accSel = document.querySelector('#accSel');
+const partSel = document.querySelector('#partSel');
+const result = document.querySelector('#result');
+const resultActivity = document.querySelector('#activity-result');
+const resultInfo = document.querySelector('#result-info');
+const type = document.querySelector('#type');
+const priceRange = document.querySelector('#priceRange');
+const accRange = document.querySelector('#accRange');
+const partRange = document.querySelector('#partRange');
+const priceRangeValue = document.querySelector('#priceRangeValue');
+const accRangeValue = document.querySelector('#accRangeValue');
+const partRangeValue = document.querySelector('#partRangeValue');
+
+const adContainer = document.querySelector('.ad-container')
+
+getKaiAd({
+  publisher: 'fe2d9134-74be-48d8-83b9-96f6d803efef',
+  app: 'bored',
+  test: 1,
+  onerror: err => console.error('Error getting ad:', err),
+  onready: ad => {
+    ad.call('display')
+  }
+})
+window.addEventListener("beforeunload", (event) => {
+  e.preventDefault();
+  //set alarm
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key == "#") return window.open('/about.html')
+  if (e.key === 'Enter' && !document.activeElement.id.includes('gen')) return document.activeElement.lastElementChild.focus();
+  if (e.key === 'ArrowDown') nav(1, '.item');
+  if (e.key === 'ArrowUp') nav(-1, '.item');
+  if (e.key === 'Enter') {
+    const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
+
+    if (document.activeElement.id === "randomgen") {
+      if (!navigator.onLine) return displayActivity(offlineActivities[Math.floor(Math.random() * offlineActivities.length)]);
+      fetch("https://www.boredapi.com/api/activity")
+        .then((response) => {
+          if (!response.ok) {
+            alert('Network response was not ok');
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          displayActivity(data)
+        })
+        .catch((error) => {
+          alert('There was a problem with the fetch operation: ' + error);
+        });
+
+      return
+    }
+    if (!navigator.onLine) {
+      let filteredElements = offlineActivities;
+      //Type
+      if (typeSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.type === typeSel.value);
+      //Price
+      if (priceSel.selectedIndex !== 0) {
+        if (priceSel.value == "&price=0") {
+          filteredElements = filteredElements.filter(element => element.price === 0);
+        } else {
+          const minpriceMatch = priceSel.value.match(/(?:&minprice=)([^&]+)/);
+          const maxpriceMatch = priceSel.value.match(/(?:&maxprice=)([^&]+)/);
+
+          const minprice = minpriceMatch ? parseFloat(minpriceMatch[1]) : 0;
+          const maxprice = maxpriceMatch ? parseFloat(maxpriceMatch[1]) : 0;
+
+          filteredElements = filteredElements.filter(element => element.price >= minprice && element.price <= maxprice);
+        }
+      }
+      //Accesiblities
+      if (accSel.selectedIndex !== 0) {
+        if (accSel.value == "&accessibility=0") {
+          filteredElements = filteredElements.filter(element => element.accessibility === 0);
+        } else {
+          const minaccMatch = accSel.value.match(/(?:&minaccessibility=)([^&]+)/);
+          const maxaccMatch = accSel.value.match(/(?:&maxaccessibility=)([^&]+)/);
+
+          const minacc = minaccMatch ? parseFloat(minaccMatch[1]) : 0;
+          const maxacc = maxaccMatch ? parseFloat(maxaccMatch[1]) : 0;
+
+          filteredElements = filteredElements.filter(element => element.accessibility >= minacc && element.accessibility <= maxacc);
+        }
+      }
+      // participants
+      if (partSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.participants === Math.floor(partSel.value));
+
+      displayActivity(filteredElements[Math.floor(Math.random() * filteredElements.length)]);
+      return
+    }
+    fetch(apiURL)
+      .then((response) => {
+        if (!response.ok) {
+          alert('Network response was not ok');
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        displayActivity(data)
+      })
+      .catch((error) => {
+        alert('There was a problem with the fetch operation:', error);
+      });
+
+    function displayActivity(json) {
+      result.style.display = 'block';
+      if (json === undefined || json === null) {
+        resultActivity.innerText = 'Nothing found'
+        resultInfo.style.display = 'none';
+        scroll();
+        return
+      }
+      resultActivity.innerText = json.activity || 'Nothing found';
+      json.activity ? resultInfo.style.display = 'block' : resultInfo.style.display = 'none';
+
+      if (navigator.onLine && offlineActivities.find(obj => obj.key === json.key) == undefined) {
+        offlineActivities.unshift(json)
+        localStorage.offlineActivities = JSON.stringify(offlineActivities);
+      }
+
+      type.innerText = 'Type: ' + json.type;
+      priceRange.value = json.price * 10;
+      accRange.value = json.accessibility * 10;
+      partRange.value = json.participants;
+      priceRangeValue.innerText = getPriceLabel(json.price);
+      accRangeValue.innerText = getAccessibilityLabel(json.accessibility);
+      partRangeValue.innerText = json.participants;
+
+      scroll();
+    }
+
+    function scroll() {
+      window.scrollTo({
+        top: resultActivity.offsetTop,
+        behavior: 'smooth',
+      });
+    }
+
+    function getPriceLabel(price) {
+      if (price === 0) return 'Free';
+      if (price >= 0.5) return 'Expensive';
+      if (price >= 0.3) return 'Affordable';
+      if (price >= 0) return 'Cheap';
+    }
+
+    function getAccessibilityLabel(accessibility) {
+      if (accessibility === 0) return 'Accessible';
+      if (accessibility >= 0.8) return 'Hardly accessible';
+      if (accessibility >= 0.6) return 'Moderately accessible';
+      if (accessibility === 0.3) return 'Fairly accessible';
+      if (accessibility >= 0) return 'Easily accessible';
+    }
+  }
+});
+
+function nav(move, elems) {
+  const currentIndex = document.activeElement;
+  const items = document.querySelectorAll(elems);
+  let currentElemIdx = [...items].indexOf(currentIndex);
+  const next = currentElemIdx + move;
+  const targetElement = items[next];
+  if (targetElement) targetElement.focus();
+  else return console.log('No nav element.');
+  if (targetElement && targetElement.classList.contains('canFocusWithin') && !targetElement.classList.contains('ad-container')) targetElement.parentNode.classList.add('focus-within')
+  if (currentIndex.classList.contains('canFocusWithin')) currentIndex.parentNode.classList.remove('focus-within');
+}
+
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error('Error Message: ' + message);
+  console.error('Source: ' + source);
+  console.error('Line Number: ' + lineno);
+  console.error('Column Number: ' + colno);
+  if (error) console.error('Error Object:', error);
+  return true;
+};
+
+const allSelectElems = document.querySelectorAll('select');
+
+for (let i = 0; i < allSelectElems.length; i++) {
+  allSelectElems[i].addEventListener('blur', () => {
+    allSelectElems[i].parentElement.focus();
+  });
+};
