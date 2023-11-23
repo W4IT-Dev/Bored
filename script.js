@@ -153,7 +153,7 @@ window.addEventListener("beforeunload", (event) => {
   //set alarm
 });
 document.addEventListener('keydown', (e) => {
-  if(e.key == "#") return window.open('/about.html')
+  if (e.key == "#") return window.open('/about.html')
   if (e.key === 'Enter' && !document.activeElement.id.includes('gen')) return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');
@@ -174,7 +174,7 @@ document.addEventListener('keydown', (e) => {
           displayActivity(data)
         })
         .catch((error) => {
-          alert('There was a problem with the fetch operation:', error);
+          alert('There was a problem with the fetch operation: ' + error);
         });
 
       return
@@ -234,9 +234,10 @@ document.addEventListener('keydown', (e) => {
 
     function displayActivity(json) {
       result.style.display = 'block';
-      if (!json) {
+      if (!json.activity) {
         resultActivity.innerText = 'Nothing found'
         resultInfo.style.display = 'none';
+        scroll();
         return
       }
       resultActivity.innerText = json.activity || 'Nothing found';
@@ -256,11 +257,14 @@ document.addEventListener('keydown', (e) => {
       accRangeValue.innerText = getAccessibilityLabel(json.accessibility);
       partRangeValue.innerText = json.participants;
 
+      scroll();
+    }
+
+    function scroll() {
       window.scrollTo({
-        top: result.offsetTop,
+        top: resultActivity.offsetTop,
         behavior: 'smooth',
       });
-
     }
 
     function getPriceLabel(price) {
