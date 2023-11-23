@@ -32,7 +32,12 @@ select {
     padding-bottom: 10px;
 }
 
-*:focus, .focus-within {
+.buttonHolder {
+    padding: 5px;
+}
+
+*:focus,
+.focus-within {
     background: #3358df;
     outline: 0;
 }
@@ -71,7 +76,8 @@ button {
     background: blue;
     color: white;
     font-weight: 500;
-    border: 1px solid darkblue;;
+    border: 1px solid darkblue;
+    ;
     font-family: "Poppings";
     border-radius: 3px;
 }

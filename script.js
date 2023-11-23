@@ -153,6 +153,7 @@ window.addEventListener("beforeunload", (event) => {
   //set alarm
 });
 document.addEventListener('keydown', (e) => {
+  if(e.key == "#") return window.open('/about.html')
   if (e.key === 'Enter' && !document.activeElement.id.includes('gen')) return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');
@@ -163,7 +164,6 @@ document.addEventListener('keydown', (e) => {
       if (!navigator.onLine) return displayActivity(offlineActivities[Math.floor(Math.random() * offlineActivities.length)]);
       fetch("https://www.boredapi.com/api/activity")
         .then((response) => {
-          console.log(response)
           if (!response.ok) {
             alert('Network response was not ok');
             throw new Error('Network response was not ok');
@@ -171,8 +171,6 @@ document.addEventListener('keydown', (e) => {
           return response.json();
         })
         .then((data) => {
-          console.log(data)
-
           displayActivity(data)
         })
         .catch((error) => {
@@ -183,10 +181,8 @@ document.addEventListener('keydown', (e) => {
     }
     if (!navigator.onLine) {
       let filteredElements = offlineActivities;
-
       //Type
       if (typeSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.type === typeSel.value);
-
       //Price
       if (priceSel.selectedIndex !== 0) {
         if (priceSel.value == "&price=0") {
@@ -201,7 +197,6 @@ document.addEventListener('keydown', (e) => {
           filteredElements = filteredElements.filter(element => element.price >= minprice && element.price <= maxprice);
         }
       }
-
       //Accesiblities
       if (accSel.selectedIndex !== 0) {
         if (accSel.value == "&accessibility=0") {
@@ -216,7 +211,6 @@ document.addEventListener('keydown', (e) => {
           filteredElements = filteredElements.filter(element => element.accessibility >= minacc && element.accessibility <= maxacc);
         }
       }
-
       // participants
       if (partSel.selectedIndex !== 0) filteredElements = filteredElements.filter(element => element.participants === Math.floor(partSel.value));
 
@@ -264,7 +258,7 @@ document.addEventListener('keydown', (e) => {
 
       window.scrollTo({
         top: result.offsetTop,
-        // behavior: 'smooth',
+        behavior: 'smooth',
       });
 
     }
@@ -293,11 +287,9 @@ function nav(move, elems) {
   const next = currentElemIdx + move;
   const targetElement = items[next];
   if (targetElement) targetElement.focus();
-  else return console.log('not there');
+  else return console.log('No nav element.');
   if (targetElement && targetElement.classList.contains('canFocusWithin') && !targetElement.classList.contains('ad-container')) targetElement.parentNode.classList.add('focus-within')
   if (currentIndex.classList.contains('canFocusWithin')) currentIndex.parentNode.classList.remove('focus-within');
-
-
 }
 
 window.onerror = function (message, source, lineno, colno, error) {
@@ -305,10 +297,7 @@ window.onerror = function (message, source, lineno, colno, error) {
   console.error('Source: ' + source);
   console.error('Line Number: ' + lineno);
   console.error('Column Number: ' + colno);
-
   if (error) console.error('Error Object:', error);
-
-
   return true;
 };
 
