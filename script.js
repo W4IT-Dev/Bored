@@ -121,7 +121,6 @@ let offlineActivities = localStorage.offlineActivities ? JSON.parse(localStorage
   }
 ]
 
-
 const typeSel = document.querySelector('#typeSel');
 const priceSel = document.querySelector('#priceSel');
 const accSel = document.querySelector('#accSel');
@@ -137,29 +136,35 @@ const priceRangeValue = document.querySelector('#priceRangeValue');
 const accRangeValue = document.querySelector('#accRangeValue');
 const partRangeValue = document.querySelector('#partRangeValue');
 
-const adContainer = document.querySelector('.ad-container')
+const adContainer = document.querySelector('#ad-container')
 
 getKaiAd({
   publisher: 'fe2d9134-74be-48d8-83b9-96f6d803efef',
   app: 'bored',
+  slot: 'bannerAd',
+  h: 60,
+  w: 230,
   test: 1,
-  onerror: err => console.error('Error getting ad:', err),
+  container: adContainer,
+  onerror: err => console.error('Custom catch:', err),
   onready: ad => {
-    ad.call('display')
+    ad.call('display', {
+      tabindex: 5,
+      navClass: 'item',
+      display: 'flex',
+    })
   }
 })
-window.addEventListener("beforeunload", (event) => {
-  e.preventDefault();
-  //set alarm
-});
+
 document.addEventListener('keydown', (e) => {
   if (e.key == "#") return window.open('/about.html')
-  if (e.key === 'Enter' && !document.activeElement.id.includes('gen')) return document.activeElement.lastElementChild.focus();
+  if (e.key === 'Enter' && !document.activeElement.id.includes('gen') && !document.activeElement.id.includes('randomgen')) return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');
   if (e.key === 'Enter') {
     const apiURL = `https://www.boredapi.com/api/activity?type=${typeSel.value}${priceSel.value}${accSel.value}&participants=${partSel.value}`;
 
+    // RANDOM GEN
     if (document.activeElement.id === "randomgen") {
       if (!navigator.onLine) return displayActivity(offlineActivities[Math.floor(Math.random() * offlineActivities.length)]);
       fetch("https://www.boredapi.com/api/activity")
@@ -179,6 +184,8 @@ document.addEventListener('keydown', (e) => {
 
       return
     }
+
+    // OFFLINE
     if (!navigator.onLine) {
       let filteredElements = offlineActivities;
       //Type
@@ -232,6 +239,8 @@ document.addEventListener('keydown', (e) => {
         alert('There was a problem with the fetch operation:', error);
       });
 
+
+    // DISPLAY ACTIVITY
     function displayActivity(json) {
       result.style.display = 'block';
       if (json === undefined || json === null) {
@@ -266,6 +275,8 @@ document.addEventListener('keydown', (e) => {
       });
     }
 
+
+    // GET LABELS 
     function getPriceLabel(price) {
       if (price === 0) return 'Free';
       if (price >= 0.5) return 'Expensive';

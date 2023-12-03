@@ -150,3 +150,7 @@ button:focus {
 * {
     outline: 0px solid red !important;
 }
+
+.ad-container-wrapper {
+    padding: 0 5px;
+}
