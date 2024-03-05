@@ -144,7 +144,6 @@ getKaiAd({
   slot: 'bannerAd',
   h: 60,
   w: 230,
-  test: 1,
   container: adContainer,
   onerror: err => console.error('Custom catch:', err),
   onready: ad => {

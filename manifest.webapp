@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "bored",
   "description": "Find new activities.",
   "type": "web",
@@ -14,7 +14,7 @@
   },
   "developer": {
     "name": "W4IT Dev",
-    "url": "https://w4it-dev.github.io/website"
+    "url": "https://github.com/w4it-dev/bored/"
   },
   "locales": {
     "en-US": {
