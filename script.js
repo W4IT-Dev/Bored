@@ -256,7 +256,7 @@ document.addEventListener('keydown', (e) => {
         localStorage.offlineActivities = JSON.stringify(offlineActivities);
       }
 
-      type.innerText = 'Type: ' + json.type;
+      type.innerText = 'Type: ' + json.type.replace(/^\w/, (c) => c.toUpperCase());;
       priceRange.value = json.price * 10;
       accRange.value = json.accessibility * 10;
       partRange.value = json.participants;

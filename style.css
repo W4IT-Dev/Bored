@@ -73,17 +73,16 @@ button {
     height: 40px;
     width: 100%;
     font-size: 25px;
-    background: blue;
+    background: #0000ff;
     color: white;
     font-weight: 500;
     border: 1px solid #00008b;
-    ;
     font-family: "Poppings";
     border-radius: 3px;
 }
 
 button:focus {
-    background: #000069;
+    background: #0000c2;
     font-weight: 800;
 }
 
