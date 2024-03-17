@@ -17,7 +17,7 @@ body {
 
 .item,
 button {
-    transition: all .2s;
+    transition: background-color .3s;
 }
 
 select {
@@ -38,7 +38,7 @@ select {
 
 *:focus,
 .focus-within {
-    background: #3358df;
+    background-color: #3358df;
     outline: 0;
 }
 
@@ -73,7 +73,7 @@ button {
     height: 40px;
     width: 100%;
     font-size: 25px;
-    background: #0000ff;
+    background-color: #0000ff;
     color: white;
     font-weight: 500;
     border: 1px solid #00008b;
@@ -82,7 +82,7 @@ button {
 }
 
 button:focus {
-    background: #0000c2;
+    background-color: #0000bf;
     font-weight: 800;
 }
 

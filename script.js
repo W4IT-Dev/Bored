@@ -1,125 +1,7 @@
 
 document.querySelector('.item').focus();
 
-let offlineActivities = localStorage.offlineActivities ? JSON.parse(localStorage.offlineActivities) : [
-  {
-    "activity": "Make a new friend",
-    "type": "social",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "1000000",
-    "accessibility": 0
-  },
-  {
-    "activity": "Configure two-factor authentication on your accounts",
-    "type": "busywork",
-    "participants": 1,
-    "price": 0,
-    "link": "https://en.wikipedia.org/wiki/Multi-factor_authentication",
-    "key": "1572120",
-    "accessibility": 0
-  },
-  {
-    "activity": "Play a video game",
-    "type": "recreational",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "5534113",
-    "accessibility": 0
-  },
-  {
-    "activity": "Practice coding in your favorite lanaguage",
-    "type": "recreational",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "7096020",
-    "accessibility": 0.1
-  },
-  {
-    "activity": "Clean out your garage",
-    "type": "busywork",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "7023703",
-    "accessibility": 0.1
-  },
-  {
-    "activity": "Write a song",
-    "type": "music",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "5188388",
-    "accessibility": 0
-  },
-  {
-    "activity": "Start a daily journal",
-    "type": "relaxation",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "8779876",
-    "accessibility": 0
-  },
-  {
-    "activity": "Learn about a distributed version control system such as Git",
-    "type": "education",
-    "participants": 1,
-    "price": 0,
-    "link": "https://en.wikipedia.org/wiki/Distributed_version_control",
-    "key": "9303608",
-    "accessibility": 0
-  },
-  {
-    "activity": "Create a meal plan for the coming week",
-    "type": "cooking",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "3491470",
-    "accessibility": 0
-  },
-  {
-    "activity": "Make a to-do list for your week",
-    "type": "busywork",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "5920481",
-    "accessibility": 0.05
-  },
-  {
-    "activity": "Organize your music collection",
-    "type": "busywork",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "3151646",
-    "accessibility": 0
-  },
-  {
-    "activity": "Create a cookbook with your favorite recipes",
-    "type": "cooking",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "1947449",
-    "accessibility": 0.05
-  },
-  {
-    "activity": "Make a bucket list",
-    "type": "busywork",
-    "participants": 1,
-    "price": 0,
-    "link": "",
-    "key": "2735499",
-    "accessibility": 0
-  }
-]
+let offlineActivities = localStorage.offlineActivities ? JSON.parse(localStorage.offlineActivities) : [{ activity: "Make a new friend", type: "social", participants: 1, price: 0, link: "", key: "1000000", accessibility: 0 }, { activity: "Configure two-factor authentication on your accounts", type: "busywork", participants: 1, price: 0, link: "https://en.wikipedia.org/wiki/Multi-factor_authentication", key: "1572120", accessibility: 0 }, { activity: "Play a video game", type: "recreational", participants: 1, price: 0, link: "", key: "5534113", accessibility: 0 }, { activity: "Practice coding in your favorite lanaguage", type: "recreational", participants: 1, price: 0, link: "", key: "7096020", accessibility: .1 }, { activity: "Clean out your garage", type: "busywork", participants: 1, price: 0, link: "", key: "7023703", accessibility: .1 }, { activity: "Write a song", type: "music", participants: 1, price: 0, link: "", key: "5188388", accessibility: 0 }, { activity: "Start a daily journal", type: "relaxation", participants: 1, price: 0, link: "", key: "8779876", accessibility: 0 }, { activity: "Learn about a distributed version control system such as Git", type: "education", participants: 1, price: 0, link: "https://en.wikipedia.org/wiki/Distributed_version_control", key: "9303608", accessibility: 0 }, { activity: "Create a meal plan for the coming week", type: "cooking", participants: 1, price: 0, link: "", key: "3491470", accessibility: 0 }, { activity: "Make a to-do list for your week", type: "busywork", participants: 1, price: 0, link: "", key: "5920481", accessibility: .05 }, { activity: "Organize your music collection", type: "busywork", participants: 1, price: 0, link: "", key: "3151646", accessibility: 0 }, { activity: "Create a cookbook with your favorite recipes", type: "cooking", participants: 1, price: 0, link: "", key: "1947449", accessibility: .05 }, { activity: "Make a bucket list", type: "busywork", participants: 1, price: 0, link: "", key: "2735499", accessibility: 0 }];
 
 const typeSel = document.querySelector('#typeSel');
 const priceSel = document.querySelector('#priceSel');
@@ -157,6 +39,13 @@ getKaiAd({
 
 document.addEventListener('keydown', (e) => {
   if (e.key == "#") return window.open('/about.html')
+  if (e.key == "*") {
+    typeSel.value = ""
+    priceSel.value = "&price=0"
+    accSel.value = "&minaccessibility=0&maxaccessibility=0.3"
+    partSel.value = "1"
+    return
+  }
   if (e.key === 'Enter' && !document.activeElement.id.includes('gen') && !document.activeElement.id.includes('randomgen')) return document.activeElement.lastElementChild.focus();
   if (e.key === 'ArrowDown') nav(1, '.item');
   if (e.key === 'ArrowUp') nav(-1, '.item');

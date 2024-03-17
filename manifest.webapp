@@ -9,8 +9,8 @@
   ],
   "theme_color": "#0000ff",
   "icons": {
-    "56": "/icon.png",
-    "112": "/icon.png"
+    "56": "/icon_56.png",
+    "112": "/icon_112.png"
   },
   "developer": {
     "name": "W4IT Dev",
