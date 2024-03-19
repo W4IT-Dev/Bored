@@ -73,6 +73,7 @@ button {
     height: 40px;
     width: 100%;
     font-size: 25px;
+    background: none;
     background-color: #0000ff;
     color: white;
     font-weight: 500;
