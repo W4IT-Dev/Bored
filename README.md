@@ -2,12 +2,15 @@
 Activity suggestions for [KaiOS](https://www.kaiostech.com).
 <br>
 
+[![https://img.shields.io/badge/v1.0.2.1-Finished%20version-darkgreen?style=for-the-badge](https://img.shields.io/badge/v1.0.2.1-Finished%20version-darkgreen?style=for-the-badge&link=)](/)
+
 ## Description
 This app is your ultimate boredom buster! Generate personalized activity suggestions based on your preferences by choosing activity types (e.g., educational, recreational, social), setting price ranges, adjusting accessibility levels, and selecting the number of participants. And If you're feeling really bored, you can generate a random activity, regardless of any settings you've made. Whether offline or online, this app will you make never bored again.
 <br>
 
 ## Download
-* [KaiStore](https://www.kaiostech.com/store/apps/?bundle_id=kaios.app.bored)
+[![KaiStore](https://img.shields.io/badge/KaiStore-6F02B5?logo=kaios&link=https://www.kaiostech.com/store/apps/?bundle_id=bored)](https://www.kaiostech.com/store/apps/?bundle_id=bored)
+[![ZIP](https://img.shields.io/badge/ZIP-181717?logo=github&link=https://github.com/W4IT-Dev/Bored/releases/download/v1.0.2.1/Bored_v1.0.2.1_GitHub_release.zip)](https://github.com/W4IT-Dev/Bored/releases/download/v1.0.2.1/Bored_v1.0.2.1_GitHub_release.zip)
 <br>
 
 # Screenshots
