@@ -2,7 +2,7 @@
 Activity suggestions for [KaiOS](https://www.kaiostech.com).
 <br>
 
-[![https://img.shields.io/badge/v1.0.2.1-Finished%20version-darkgreen?style=for-the-badge](https://img.shields.io/badge/v1.0.2.1-Finished%20version-darkgreen?style=for-the-badge&link=)](/)
+[![https://img.shields.io/badge/v1.0.2.1-Finished%20version-darkgreen?style=for-the-badge](https://img.shields.io/badge/v1.0.2.1-Currently%20troubleshooting-red?style=for-the-badge&link=)](/)
 
 ## Description
 This app is your ultimate boredom buster! Generate personalized activity suggestions based on your preferences by choosing activity types (e.g., educational, recreational, social), setting price ranges, adjusting accessibility levels, and selecting the number of participants. And If you're feeling really bored, you can generate a random activity, regardless of any settings you've made. Whether offline or online, this app will you make never bored again.
